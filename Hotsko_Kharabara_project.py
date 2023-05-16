@@ -5,15 +5,10 @@ import cv2
 import tensorflow as tf
 import joblib
 
-def normalize_data(data):
-    mean_of_each_image = data.mean(axis=0)
-    data_normalized = data - mean_of_each_image
-    # data_normalized /= np.std(data, axis=0)
-    return data_normalized
+
 
 def transform_data(data, principal_components):
-    data_normalized = normalize_data(data)
-    return data_normalized.dot(principal_components)
+    return data.dot(principal_components)
 
 
 def run(img_pathes):
@@ -42,4 +37,4 @@ def run(img_pathes):
     return Decision_Tree_model_result, Random_Forest_model_result, KNN_model_result, SVC_model_result
     
 if __name__ == "__main__":
-    print(run(["static/2.jpg"]))
+    print(run(["data/photos/78.jpg"]))

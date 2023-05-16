@@ -2,6 +2,7 @@
 from flask import Flask, request, render_template, redirect
 import os
 import zipfile
+from Hotsko_Kharabara_project import run
 
 app = Flask(__name__)
 
@@ -23,9 +24,9 @@ def upload_image_file():
          os.remove(filename)
 
       # Call your function here and get the result
-      # result = your_function(filename)
+      result = run([filename])
     #   print(filename)
-      result = [1, 2, 3, 4, 5]
+      
       
       return render_template('result.html', result = result)
    else:
