@@ -39,7 +39,6 @@ def run(img_pathes):
     Random_Forest_model_result = Random_Forest_model.predict(img_transformed)
     KNN_model_result = KNN_model.predict(img_transformed)
     SVC_model_result = SVC_model.predict(img_transformed)
-    print(Random_Forest_model_result)
     return Decision_Tree_model_result, Random_Forest_model_result, KNN_model_result, SVC_model_result
     
 if __name__ == "__main__":
