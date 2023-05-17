@@ -1,4 +1,3 @@
-# app.py
 from flask import Flask, request, render_template, redirect
 import os
 import zipfile
@@ -17,20 +16,23 @@ def upload_image_file():
       filename = os.path.join('static', f.filename)
       f.save(filename)
       print(filename)
-
       if zipfile.is_zipfile(filename):
          with zipfile.ZipFile(filename, 'r') as zip_ref:
             zip_ref.extractall('static')
          os.remove(filename)
-
+         
       # Call your function here and get the result
       result = run([filename])
-    #   print(filename)
+      result = [{'method': 'Decision Tree Model', 'result': result[0][0]},\
+         {'method': 'Random Forest Model', 'result': result[1][0]},\
+         {'method': 'KNN Model', 'result': result[2][0]},\
+         {'method': 'SVD Model', 'result': result[3][0]}]
       
-      
+      #print(filename)
       return render_template('result.html', result = result)
+   
    else:
       return redirect('/')
 
 if __name__ == '__main__':
-   app.run(debug = True, port=5000)
+   app.run(debug = True, port=8000)

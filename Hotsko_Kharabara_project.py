@@ -5,11 +5,8 @@ import cv2
 import tensorflow as tf
 import joblib
 
-
-
 def transform_data(data, principal_components):
     return data.dot(principal_components)
-
 
 def run(img_pathes):
     images_np = np.zeros((len(img_pathes), 100, 100), dtype=np.uint8)
@@ -17,12 +14,10 @@ def run(img_pathes):
         img = cv2.imread(img_pathes[i], cv2.IMREAD_GRAYSCALE)
         img = cv2.resize(img, (100, 100))
         images_np[i] = img
-    
     principal_components = np.load('model_data/principal_components.npy')
-
     images_np = images_np.reshape(images_np.shape[0], -1)
-
     img_transformed = transform_data(images_np, principal_components)
+    
     # Load the model
     Random_Forest_model = joblib.load('model_data/Random_Forest.pkl')
     Decision_Tree_model = joblib.load('model_data/decission_tree.pkl')
